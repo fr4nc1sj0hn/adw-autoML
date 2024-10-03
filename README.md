@@ -23,6 +23,7 @@ Before you begin, ensure you have met the following requirements:
 - Python 3.x installed
 - Flask installed (`pip install flask`)
 - Access to an ADW AutoML deployed Model
+- NBA Data Of Course
 
 ## Installation
 

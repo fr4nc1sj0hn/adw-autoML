@@ -8,7 +8,7 @@ This is a Flask web application that predicts the results of NBA games based on 
 - **Tailwind CSS** for responsive and modern design
 - **Game result prediction** based on NBA team statistics
 - Prepopulated form fields for quicker user interaction
-- Displays the prediction results in a clean and user-friendly format
+
 
 ## Technologies Used
 

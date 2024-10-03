@@ -1,0 +1,42 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Result Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-5">
+        <h1 class="text-2xl font-bold mb-5">Game Result Prediction</h1>
+        {% if result %}
+            <div class="mt-6">
+                <h2 class="text-xl font-bold">Result:</h2>
+                <pre class="bg-gray-100 p-4 rounded border">{{ result | tojson(indent=2) }}</pre>
+                <h3 class="text-lg font-semibold">Classifications:</h3>
+                <ul class="list-disc pl-5">
+                    {% for classification in result.scoringResults[0].classifications %}
+                        <li>{{ classification.label }}: {{ classification.probability | round(4) }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form method="POST" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            {% for attr in attributes %}
+                <div class="flex flex-col">
+                    <label for="{{ attr.name }}" class="mb-1 font-semibold">{{ attr.label }}</label>
+                    <input type="{{ attr.type }}" name="{{ attr.name }}" id="{{ attr.name }}"
+                           value="{{ prepopulated_values[attr.name] | default('') }}"
+                           {% if attr.required %}required{% endif %}
+                           class="border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300" />
+                </div>
+            {% endfor %}
+            <div class="col-span-4 mt-4">
+                <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 rounded hover:bg-blue-600 transition duration-200">Submit</button>
+            </div>
+        </form>
+        
+    </div>
+</body>
+</html>
